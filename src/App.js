@@ -1,23 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import NotFound from "./components/NotFound";
+import Footer from "./components/Footer";
+import Games from "./components/Games";
+import SingleGame from "./components/SingleGame";
+import logo from "./images/logo.png";
 
 function App() {
+  const [colorChange, setColorchange] = React.useState(false);
+  const changeNavbarColor = () => {
+    if (window.scrollY >= 80) {
+      setColorchange(true);
+    } else {
+      setColorchange(false);
+    }
+  };
+  window.addEventListener("scroll", changeNavbarColor);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <nav className={colorChange ? "navbar-colorChange" : ""}>
+          <div className="nav-title">
+            <Link to="/">
+              <img className="nav-title-img" src={logo} alt="Gameverse" />
+            </Link>
+            <h4>Gameverse</h4>
+          </div>
+          <div className="game-links">
+            <Link to="/games"> All Games</Link>
+          </div>
+          <div className="nav-links">
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/login">Log In</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        </nav>
       </header>
+      <div className="cross"></div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/games/:id" element={<SingleGame />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
