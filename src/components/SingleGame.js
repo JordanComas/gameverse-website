@@ -50,7 +50,7 @@ const SingleGame = () => {
           </section>
 
           <h4 className="main-single-game-system-title">
-            System Requirements:{" "}
+            System Requirements:
           </h4>
           <div className="main-singlegame-system">
             {gameDetails.minimum_system_requirements && (

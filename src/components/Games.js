@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import TopButton from "./TopButton";
 import FavButton from "./FavButton";
 import Footer from "./Footer";
+import warrior from "../images/amazon.png";
+import amazonJSON from "../amazon.json";
+import useWindowSize from "./WindowSize";
+import glass from "../images/glass.png";
 
 const Games = () => {
   const [games, setGames] = React.useState([]);
@@ -34,9 +38,14 @@ const Games = () => {
     setsearch(event.target.value);
   };
 
+  const size = useWindowSize();
+
+  // let flag;
+
   return (
     <div>
       <div className="main-games">
+        {/* {!size.width <= 425 && size.width >= 426 && ( */}
         <input
           className="search"
           type="text"
@@ -44,6 +53,9 @@ const Games = () => {
           onChange={searchGame}
           placeholder="Search game or genre here..."
         />
+        {/* )} */}
+        {/* <img src={glass} alt="search" /> */}
+
         {games
           .filter((item) => {
             const searchTerm = search.toLowerCase();
@@ -58,12 +70,8 @@ const Games = () => {
           })
           .map(function (game) {
             return (
-              <div>
-                <Link
-                  className="main-games-layout"
-                  key={game.id}
-                  to={`/games/${game.id}`}
-                >
+              <div key={game.id} className="main-games-layout">
+                <Link to={`/games/${game.id}`}>
                   <img src={game.thumbnail} alt="game picture" />
                   <br />
                   <h3>{game.title.toUpperCase()}</h3>
@@ -83,6 +91,13 @@ const Games = () => {
             );
           })}
         <TopButton />
+        <div className="main-games-amazon">
+          <Link to="/amazon">
+            <img height="200" src={warrior} />
+            <h3>{amazonJSON.title} </h3>
+            {amazonJSON.short_description}
+          </Link>
+        </div>
       </div>
       <Footer />
     </div>

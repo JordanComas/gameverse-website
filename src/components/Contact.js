@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "./Footer";
+import Input from "./Input";
 
 const ContactForm = () => {
   const [status, setStatus] = React.useState("");
@@ -13,17 +14,13 @@ const ContactForm = () => {
     <div>
       <form className="main-contact" onSubmit={handleSubmit}>
         <h2 style={{ color: "white" }}>Contact Us</h2>
-        <div>
-          <input type="text" placeholder="Your name" name="name" required />
-        </div>
-        <div>
-          <input type="email" placeholder="Email" name="email" required />
-        </div>
+        <Input name="Full Name" type="text" />
+        <Input name="Email Address" type="email" />
         <div>
           <textarea placeholder="Your message" name="message" required />
         </div>
         <div>
-          <button type="submit"> Send a message </button>
+          <button type="submit"> Send message </button>
         </div>
         <h3>{status}</h3>
       </form>

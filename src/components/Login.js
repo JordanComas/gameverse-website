@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
+import Input from "./Input";
 
 const Login = () => {
   const [username, setUsername] = React.useState("");
